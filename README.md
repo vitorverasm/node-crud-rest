@@ -20,7 +20,7 @@ A simple restful NodeJS CRUD, with expressJS and mongoDB.
 | /api/products/:product_id |       PUT         | Update product by id  |    
 | /api/products/:product_id |       DELETE      | Delete product by id  |
 
-##Running...
+## Running
 
 ```
 git clone https://github.com/vitor-veras/node-crud-rest.git
