@@ -18,12 +18,15 @@ app.use(bodyParser.json());
 
 //SETUP MONGOOSE
 //cloud platform -> MLAB URI
-mongoose.connect('mongodb://crud-restapi:1789@ds044577.mlab.com:44577/node-crud-restapi', {
-    useMongoClient: true
-});
+// mongoose.connect('mongodb://<dbusername>:<dbpassword>@ds044577.mlab.com:44577/node-crud-restapi', {
+//     useMongoClient: true
+// });
+
 //SETUP MONGOOSE
 //Local platform -> MONGODB
-
+mongoose.connect('mongodb://localhost:27017/node-crud',{
+   useMongoClient:true
+});
 
 //RUN SERVER ON PORT 3000
 var port = process.env.port || 3000;
