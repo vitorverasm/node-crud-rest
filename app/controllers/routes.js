@@ -1,51 +1,22 @@
-/*
-  Description: This is the setup of the nodeJS server, with the routes of the rest api.
-  Author: Vitor Veras
-  Creation date:  02/12/2017
-*/
-
-//CALL PACKAGES
 var express = require('express');
-var app = express();
 var bodyParser = require('body-parser');
-var mongoose = require('mongoose');
-var Product = require('./app/models/product');
-mongoose.Promise = global.Promise;
+var Product = require('./../models/product');
+var router = express.Router();
 
-//SETUP BODYPARSER
-app.use(bodyParser.urlencoded({extended: true}));
-app.use(bodyParser.json());
-
-//SETUP MONGOOSE
-//cloud platform -> MLAB URI
-// mongoose.connect('mongodb://<dbusername>:<dbpassword>@ds044577.mlab.com:44577/node-crud-restapi', {
-//     useMongoClient: true
-// });
-
-//SETUP MONGOOSE
-//Local platform -> MONGODB
-mongoose.connect('mongodb://localhost:27017/node-crud',{
-   useMongoClient:true
-});
-
-//RUN SERVER ON PORT 3000
-var port = process.env.port || 3000;
-
+// SETUP BODYPARSER
+router.use(bodyParser.urlencoded({extended: true}));
+router.use(bodyParser.json());
 
 /* ---------------------------
      R O U T E S - S E T U P
    ---------------------------
 */
 
-//Router instance
-var router = express.Router();
 //setup middleware
 router.use(function (req, res, next) {
     console.log("request");
     next();
 });
-//setup /api as root route
-app.use('/api', router);
 
 //Setup /api'/' - GET - WELCOME PAGE
 router.get('/', function (req, res) {
@@ -70,7 +41,7 @@ router.route('/products')
         //response
         products.save(function (error) {
             if (error)
-                res.send('Failed to register new product. ERROR: ' + error);
+                res.status(500).send('Failed to register new product. ERROR: ' + error);
             res.json({message: "product successfully registered"});
         });
     })
@@ -80,7 +51,7 @@ router.route('/products')
     .get(function (req, res) {
         Product.find(function (error, products) {
             if (error)
-                res.send("Failed to show products. ERROR: " + error);
+                res.status(500).send("Failed to show products. ERROR: " + error);
             res.json(products);
         });
     });
@@ -93,7 +64,7 @@ router.route('/products/:product_id')
     .get(function (req, res) {
         Product.findById(req.params.product_id, function (error, product) {
             if (error)
-                res.send('error: ' + error);
+                res.status(500).send('error: ' + error);
             res.json(product);
         })
     })
@@ -112,7 +83,7 @@ router.route('/products/:product_id')
             //save
             product.save(function (error) {
                 if (error)
-                    res.send('Failed to update product. ERROR: ' + error);
+                    res.status(500).send('Failed to update product. ERROR: ' + error);
                 res.json({message: 'Product update successful!'});
             });
         });
@@ -125,10 +96,10 @@ router.route('/products/:product_id')
             _id: req.params.product_id
         }, function (error) {
             if (error)
-                res.send('Unable to find product by id. Failed to remove. ERROR: '+error);
+                res.status(500).send('Unable to find product by id. Failed to remove. ERROR: ' + error);
             res.json({message: 'Product deleted successful!'});
         });
     });
-//RUN SERVER ON PORT 3000
-app.listen(port);
-console.log("Running server on port " + port);
+
+//export
+module.exports = router;
