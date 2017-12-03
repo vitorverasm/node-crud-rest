@@ -102,19 +102,30 @@ router.route('/products/:product_id')
         Product.findById(req.params.product_id, function (error, product) {
             if (error)
                 res.send('error: ' + error);
-                //update attributes of the product with req fields
-                product.name=req.body.name;
-                product.amount=req.body.amount;
-                product.description=req.body.description;
-                //save
-                product.save(function (error) {
-                    if (error)
-                        res.send('Failed to update product. ERROR: '+error);
-                    res.json({message:'Product update successful!'});
-                });
+            //update attributes of the product with req fields
+            product.name = req.body.name;
+            product.amount = req.body.amount;
+            product.description = req.body.description;
+            //save
+            product.save(function (error) {
+                if (error)
+                    res.send('Failed to update product. ERROR: ' + error);
+                res.json({message: 'Product update successful!'});
+            });
+        });
+    })
+    /* ---------------------------------------------------------------------------------------
+         (4) DELETE PRODUCT(by id) - (DELETE) - http://localhost:3000/api/products/product_id
+       ---------------------------------------------------------------------------------------*/
+    .delete(function (req, res) {
+        Product.remove({
+            _id: req.params.product_id
+        }, function (error) {
+            if (error)
+                res.send('Unable to find product by id. Failed to remove. ERROR: '+error);
+            res.json({message: 'Product deleted successful!'});
         });
     });
-
 //RUN SERVER ON PORT 3000
 app.listen(port);
 console.log("Running server on port " + port);
