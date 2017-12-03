@@ -12,13 +12,13 @@ A simple restful NodeJS CRUD, with expressJS and mongoDB.
 
 ## Routes
 
-        ROUTE             |       HTTP        |      description      | 
-------------------------- | ----------------- | --------------------- | 
-/api/                     |       GET         | Main page             | 
-/api/products             |       GET         | Show all products     | 
-/api/products/:product_id |       GET         | Show by id            | 
-/api/products/:product_id |       PUT         | Update product by id  |    
-/api/products/:product_id |       DELETE      | Delete product by id  |
+|          ROUTE            |       HTTP        |      DESCRIPTION      | 
+| ------------------------- | ----------------- | --------------------- | 
+| /api/                     |       GET         | Main page             | 
+| /api/products             |       GET         | Show all products     | 
+| /api/products/:product_id |       GET         | Show by id            | 
+| /api/products/:product_id |       PUT         | Update product by id  |    
+| /api/products/:product_id |       DELETE      | Delete product by id  |
 
 ##Running...
 
