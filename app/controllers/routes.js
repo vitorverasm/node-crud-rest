@@ -41,7 +41,7 @@ router.route('/products')
         //response
         products.save(function (error) {
             if (error)
-                res.send('Failed to register new product. ERROR: ' + error);
+                res.status(500).send('Failed to register new product. ERROR: ' + error);
             res.json({message: "product successfully registered"});
         });
     })
@@ -51,7 +51,7 @@ router.route('/products')
     .get(function (req, res) {
         Product.find(function (error, products) {
             if (error)
-                res.send("Failed to show products. ERROR: " + error);
+                res.status(500).send("Failed to show products. ERROR: " + error);
             res.json(products);
         });
     });
@@ -64,7 +64,7 @@ router.route('/products/:product_id')
     .get(function (req, res) {
         Product.findById(req.params.product_id, function (error, product) {
             if (error)
-                res.send('error: ' + error);
+                res.status(500).send('error: ' + error);
             res.json(product);
         })
     })
@@ -83,7 +83,7 @@ router.route('/products/:product_id')
             //save
             product.save(function (error) {
                 if (error)
-                    res.send('Failed to update product. ERROR: ' + error);
+                    res.status(500).send('Failed to update product. ERROR: ' + error);
                 res.json({message: 'Product update successful!'});
             });
         });
@@ -96,7 +96,7 @@ router.route('/products/:product_id')
             _id: req.params.product_id
         }, function (error) {
             if (error)
-                res.send('Unable to find product by id. Failed to remove. ERROR: ' + error);
+                res.status(500).send('Unable to find product by id. Failed to remove. ERROR: ' + error);
             res.json({message: 'Product deleted successful!'});
         });
     });

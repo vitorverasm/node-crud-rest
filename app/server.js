@@ -7,8 +7,8 @@
 //CALL PACKAGES
 var express = require('express');
 var app = express();
-var db = require('./app/models/db');
-var Router = require('./app/controllers/routes');
+var db = require('./models/db');
+var Router = require('./controllers/routes');
 //RUN SERVER ON PORT 3000
 var port = process.env.port || 3000;
 
