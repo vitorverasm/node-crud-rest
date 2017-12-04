@@ -20,7 +20,7 @@ router.use(function (req, res, next) {
 
 //Setup /api'/' - GET - WELCOME PAGE
 router.get('/', function (req, res) {
-    res.json({message: "Wecome to XYZ store!!"});
+    res.sendFile('C:\\Users\\vitor\\WebstormProjects\\node-crud\\app\\views\\index.html');
 });
 
 /* ----------------------------
