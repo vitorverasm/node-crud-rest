@@ -39,3 +39,7 @@ If your db is local you'll have to run it:
 mongod
 ```
 
+
+## Author
+
+* **Vitor Veras de Moura** - [GitHub](https://github.com/vitor-veras) - Email: vitorverasm@gmail.com
